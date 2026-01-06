@@ -1,0 +1,194 @@
+{
+    "projectName": "EdgeNPU",
+    "version": "1.0.0",
+    "tagline": "High-Performance Neural Processing Unit for Edge AI",
+    "description": "A production-grade NPU IP core featuring 16×16 systolic array architecture, delivering 512 GOPS peak performance at sub-watt power consumption for edge inference applications.",
+    "author": "EdgeNPU Team",
+    "license": "Proprietary",
+    "lastUpdated": "2026-01-06",
+    "repository": "https://github.com/edgenpu/EdgeNPU",
+    "documentation": {
+        "language": "en",
+        "versions": ["1.0.0"]
+    },
+    "sections": [
+        {
+            "id": "overview",
+            "title": "Overview",
+            "items": [
+                {
+                    "id": "introduction",
+                    "title": "Introduction",
+                    "icon": "home"
+                },
+                {
+                    "id": "features",
+                    "title": "Key Features",
+                    "icon": "star"
+                },
+                {
+                    "id": "specifications",
+                    "title": "Technical Specifications",
+                    "icon": "file-text"
+                },
+                {
+                    "id": "comparison",
+                    "title": "Performance Comparison",
+                    "icon": "trending-up"
+                }
+            ]
+        },
+        {
+            "id": "architecture",
+            "title": "Architecture",
+            "items": [
+                {
+                    "id": "system-architecture",
+                    "title": "System Architecture",
+                    "icon": "cpu"
+                },
+                {
+                    "id": "pe-array",
+                    "title": "PE Array (Systolic Array)",
+                    "icon": "grid"
+                },
+                {
+                    "id": "memory-subsystem",
+                    "title": "Memory Subsystem",
+                    "icon": "database"
+                },
+                {
+                    "id": "dma-engine",
+                    "title": "DMA Engine",
+                    "icon": "arrow-right-left"
+                },
+                {
+                    "id": "dataflow",
+                    "title": "Data Flow & Pipeline",
+                    "icon": "layers"
+                }
+            ]
+        },
+        {
+            "id": "programming",
+            "title": "Programming Model",
+            "items": [
+                {
+                    "id": "programming-overview",
+                    "title": "Programming Overview",
+                    "icon": "code"
+                },
+                {
+                    "id": "instruction-set",
+                    "title": "Instruction Set Architecture",
+                    "icon": "terminal"
+                },
+                {
+                    "id": "register-map",
+                    "title": "Register Map",
+                    "icon": "list"
+                },
+                {
+                    "id": "quantization",
+                    "title": "Quantization Guide",
+                    "icon": "sliders"
+                }
+            ]
+        },
+        {
+            "id": "integration",
+            "title": "Integration Guide",
+            "items": [
+                {
+                    "id": "soc-integration",
+                    "title": "SoC Integration",
+                    "icon": "layers"
+                },
+                {
+                    "id": "axi-interface",
+                    "title": "AXI Interface",
+                    "icon": "plug"
+                },
+                {
+                    "id": "clocking-reset",
+                    "title": "Clocking & Reset",
+                    "icon": "clock"
+                },
+                {
+                    "id": "verification",
+                    "title": "Verification Guide",
+                    "icon": "check-circle"
+                }
+            ]
+        },
+        {
+            "id": "software",
+            "title": "Software SDK",
+            "items": [
+                {
+                    "id": "sdk-overview",
+                    "title": "SDK Overview",
+                    "icon": "package"
+                },
+                {
+                    "id": "c-api",
+                    "title": "C/C++ Runtime API",
+                    "icon": "file-code"
+                },
+                {
+                    "id": "python-api",
+                    "title": "Python SDK",
+                    "icon": "file-code"
+                },
+                {
+                    "id": "compiler",
+                    "title": "Model Compiler",
+                    "icon": "settings"
+                }
+            ]
+        },
+        {
+            "id": "getting-started",
+            "title": "Getting Started",
+            "items": [
+                {
+                    "id": "quickstart",
+                    "title": "Quick Start Guide",
+                    "icon": "zap"
+                },
+                {
+                    "id": "setup",
+                    "title": "Environment Setup",
+                    "icon": "settings"
+                },
+                {
+                    "id": "first-inference",
+                    "title": "Running First Inference",
+                    "icon": "play"
+                },
+                {
+                    "id": "examples",
+                    "title": "Example Applications",
+                    "icon": "book-open"
+                }
+            ]
+        }
+    ],
+    "quickLinks": [
+        {
+            "title": "Datasheet",
+            "url": "#specifications",
+            "description": "Complete technical specifications"
+        },
+        {
+            "title": "API Reference",
+            "url": "#c-api",
+            "description": "Runtime API documentation"
+        },
+        {
+            "title": "GitHub",
+            "url": "https://github.com/edgenpu/EdgeNPU",
+            "description": "Source code repository"
+        }
+    ]
+}

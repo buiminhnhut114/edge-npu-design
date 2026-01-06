@@ -1,0 +1,58 @@
+{
+    "name": "EdgeNPU",
+    "version": "1.0.0",
+    "description": "High-performance Neural Processing Unit for Edge AI",
+    "author": "EdgeNPU Team",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/example/EdgeNPU.git"
+    },
+    "configuration": {
+        "pe_array": {
+            "rows": 16,
+            "cols": 16,
+            "data_width": 8,
+            "weight_width": 8,
+            "accumulator_width": 32
+        },
+        "memory": {
+            "weight_buffer_kb": 256,
+            "activation_buffer_kb": 256,
+            "instruction_buffer_kb": 16
+        },
+        "supported_operations": [
+            "conv2d",
+            "depthwise_conv2d",
+            "fully_connected",
+            "max_pool",
+            "avg_pool",
+            "global_avg_pool",
+            "relu",
+            "relu6",
+            "sigmoid",
+            "tanh",
+            "swish",
+            "gelu",
+            "add",
+            "multiply",
+            "concatenate"
+        ],
+        "data_formats": [
+            "int8",
+            "int16",
+            "fp16",
+            "bf16"
+        ],
+        "axi_interface": {
+            "data_width": 128,
+            "addr_width": 40,
+            "id_width": 8
+        }
+    },
+    "tools": {
+        "simulator": "iverilog",
+        "synthesizer": "yosys",
+        "linter": "verilator"
+    }
+}
