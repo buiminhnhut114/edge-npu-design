@@ -1,134 +1,208 @@
 <div align="center">
 
-# EdgeNPU
+# EdgeNPU Design
 
-### High-Performance Neural Processing Unit for Edge AI
+### High-Performance Neural Processing Unit for Edge AI Applications
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![RTL](https://img.shields.io/badge/RTL-SystemVerilog-orange.svg)](#)
 [![Verification](https://img.shields.io/badge/Verification-UVM-green.svg)](#)
 [![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://buiminhnhut114.github.io/edge-npu-design/)
 
-**EdgeNPU** is a production-grade Neural Processing Unit IP core designed for high-performance, low-power neural network inference at the edge. Built on a **16×16 systolic array architecture**, EdgeNPU delivers up to **512 GOPS** peak performance while consuming less than **500mW**.
+**EdgeNPU** là một IP core Neural Processing Unit (NPU) được thiết kế cho suy luận mạng neural hiệu suất cao, tiêu thụ điện năng thấp tại edge. Được xây dựng trên **kiến trúc systolic array 16×16**, EdgeNPU đạt hiệu suất đỉnh **512 GOPS** với mức tiêu thụ dưới **500mW**.
 
-[Documentation](https://buiminhnhut114.github.io/edge-npu-design/) · [Getting Started](#quick-start) · [Architecture](#architecture) · [Contributing](#contributing)
+[Tài liệu](https://buiminhnhut114.github.io/edge-npu-design/) · [Bắt đầu](#quick-start) · [Kiến trúc](#architecture) · [Đóng góp](#contributing)
 
 </div>
 
 ---
 
-## Key Features
+## Tính năng chính
 
-| Feature | Specification |
-|---------|--------------|
-| **Architecture** | 16×16 Weight-Stationary Systolic Array |
-| **Peak Performance** | 512 GOPS (INT8) @ 1 GHz |
-| **Power Efficiency** | > 1 TOPS/W |
-| **On-Chip Memory** | 528 KB SRAM (Weight + Activation + Instruction) |
-| **Data Types** | INT8, INT16, FP16, BF16 |
-| **Interface** | AXI4 Master (128-bit) + AXI4-Lite Slave (32-bit) |
+| Tính năng | Thông số kỹ thuật |
+|-----------|-------------------|
+| **Kiến trúc** | Systolic Array 16×16 Weight-Stationary |
+| **Hiệu suất đỉnh** | 512 GOPS (INT8) @ 1 GHz |
+| **Hiệu quả năng lượng** | > 1 TOPS/W |
+| **Bộ nhớ trên chip** | 528 KB SRAM (Weight + Activation + Instruction) |
+| **Kiểu dữ liệu** | INT8, INT16, FP16, BF16 |
+| **Giao diện** | AXI4 Master (128-bit) + AXI4-Lite Slave (32-bit) |
 
-### Supported Operations
+### Các phép toán được hỗ trợ
 
-- **Convolution**: Conv2D, DepthwiseConv2D, TransposeConv2D
-- **Activation**: ReLU, ReLU6, Sigmoid, Tanh, Swish, GELU
+- **Convolution**: Conv2D, DepthwiseConv2D, TransposeConv2D, Dilated Conv
+- **Activation**: ReLU, ReLU6, Sigmoid, Tanh, Swish, GELU, LeakyReLU
 - **Pooling**: MaxPool2D, AvgPool2D, GlobalAveragePool
-- **Other**: FullyConnected, Add, Multiply, Concat, BatchNorm (fused)
+- **Normalization**: BatchNorm (fused), LayerNorm
+- **Element-wise**: Add, Multiply, Subtract, Concat, Split, Reshape
+- **Linear**: FullyConnected, MatMul
+
+### Đặc điểm kỹ thuật chi tiết
+
+- **PE Array**: 16×16 = 256 Processing Elements
+- **Instruction Set**: 64-bit RISC-style với 12 opcodes
+- **DMA Engine**: 4-channel với hỗ trợ 2D/3D transfers
+- **Memory Bandwidth**: 16 GB/s (internal), 12.8 GB/s (external)
+- **Clock Domain**: Single clock domain với optional clock gating
+- **Debug Support**: JTAG interface và performance counters
 
 ---
 
-## Architecture
+## Kiến trúc
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        AXI4 Interface                           │
+│                     Giao diện AXI4                             │
 ├─────────────────────────────────────────────────────────────────┤
 │  ┌───────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────┐  │
-│  │    DMA    │  │ Weight Buf   │  │ Activation   │  │  Inst  │  │
-│  │  Engine   │  │   256 KB     │  │  Buf 256 KB  │  │ 16 KB  │  │
+│  │ DMA Engine│  │ Weight Buffer│  │ Activation   │  │ Inst   │  │
+│  │ 4-channel │  │   256 KB     │  │ Buffer 256KB │  │ 16 KB  │  │
 │  └─────┬─────┘  └──────┬───────┘  └──────┬───────┘  └────────┘  │
 │        │               │                  │                      │
 │        ▼               ▼                  ▼                      │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │               PE Array (16×16 Systolic)                 │    │
-│  │                    256 MACs                             │    │
+│  │            PE Array (16×16 Systolic)                   │    │
+│  │                  256 MACs                              │    │
+│  │  ┌────┐ ┌────┐ ┌────┐     ┌────┐                      │    │
+│  │  │PE  │ │PE  │ │PE  │ ... │PE  │                      │    │
+│  │  └────┘ └────┘ └────┘     └────┘                      │    │
+│  │    │      │      │         │                          │    │
+│  │  ┌────┐ ┌────┐ ┌────┐     ┌────┐                      │    │
+│  │  │PE  │ │PE  │ │PE  │ ... │PE  │                      │    │
+│  │  └────┘ └────┘ └────┘     └────┘                      │    │
 │  └─────────────────────────────────────────────────────────┘    │
 │        │                                                         │
 │        ▼                                                         │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │  Post-Processing: Activation | Pooling | Quantization   │    │
+│  │ Post-Processing: Activation | Pooling | Quantization   │    │
+│  │ • ReLU, ReLU6, Sigmoid, Tanh, Swish, GELU             │    │
+│  │ • MaxPool, AvgPool, GlobalPool                         │    │
+│  │ • BatchNorm, LayerNorm                                 │    │
 │  └─────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Project Structure
+## Cấu trúc dự án
 
 ```
 EdgeNPU/
-├── rtl/                    # RTL Design (SystemVerilog)
-│   ├── core/               # NPU Core (PE Array, Activation, Pooling)
-│   ├── memory/             # Memory Subsystem (SRAM, DMA, Buffers)
+├── rtl/                    # Thiết kế RTL (SystemVerilog)
+│   ├── core/               # NPU Core
+│   │   ├── pe_array/       # Processing Element Array
+│   │   ├── activation/     # Activation Functions
+│   │   ├── pooling/        # Pooling Operations
+│   │   ├── controller/     # NPU Controller
+│   │   ├── conv/           # Convolution Engine
+│   │   ├── accumulator/    # Accumulator
+│   │   ├── batchnorm/      # Batch Normalization
+│   │   └── elementwise/    # Element-wise Operations
+│   ├── memory/             # Memory Subsystem
+│   │   ├── sram/           # SRAM Controllers
+│   │   ├── buffer/         # Buffer Management
+│   │   └── dma/            # DMA Engine
 │   ├── interconnect/       # AXI/APB Interfaces
+│   ├── debug/              # Debug Interface
 │   └── top/                # Top-level Integration
 ├── verification/           # Verification Environment
-│   ├── tb/                 # Testbenches (Unit, Integration, System)
+│   ├── tb/                 # Testbenches
 │   ├── uvm/                # UVM Environment
 │   └── formal/             # Formal Verification
 ├── software/               # Software Stack
 │   ├── driver/             # Linux & Bare-metal Drivers
 │   ├── compiler/           # Model Compiler (ONNX, TFLite)
+│   ├── runtime/            # Runtime Library
+│   ├── firmware/           # Firmware
 │   └── sdk/                # C/C++/Python SDK
-├── docs/                   # Documentation
-├── doc-site/               # Interactive Documentation Website
-└── scripts/                # Build & Automation Scripts
+├── ip/                     # IP Cores
+│   ├── memory/             # Memory IP
+│   ├── axi/                # AXI IP
+│   ├── npu/                # NPU-specific IP
+│   └── third_party/        # Third-party IP
+├── flow/                   # Build & Synthesis Flow
+│   ├── build/              # Build Scripts
+│   ├── scripts/            # Automation Scripts
+│   └── synthesis/          # Synthesis Scripts
+├── doc-sites/              # Interactive Documentation Website
+└── docs/                   # Documentation
 ```
 
 ---
 
-## Quick Start
+## Bắt đầu nhanh
 
-### Prerequisites
+### Yêu cầu hệ thống
 
 - **OS**: Ubuntu 20.04+ / CentOS 7+
-- **Simulator**: Icarus Verilog, Verilator, or commercial (VCS, Questa)
-- **Python**: 3.8+ (for SDK and compiler)
+- **Simulator**: Icarus Verilog, Verilator, hoặc thương mại (VCS, Questa)
+- **Python**: 3.8+ (cho SDK và compiler)
 
-### Installation
+### Cài đặt
 
 ```bash
 # Clone repository
 git clone https://github.com/buiminhnhut114/edge-npu-design.git
 cd edge-npu-design
 
-# Install Python dependencies
+# Cài đặt Python dependencies
 pip install -r requirements.txt
 
-# Install simulation tools
+# Cài đặt simulation tools
 sudo apt install iverilog verilator gtkwave
 ```
 
-### Running Simulation
+### Chạy Simulation
 
 ```bash
-# Run all unit tests
+# Chạy tất cả unit tests
 make test
 
-# Run PE array simulation
+# Chạy PE unit test
 make sim_pe
 
-# Run full system simulation
-make sim_system
+# Chạy PE array simulation
+make sim_pe_array
 
-# View waveforms
-make wave
+# Chạy full system simulation
+make sim
+
+# Lint RTL code
+make lint
+
+# Xem waveforms
+gtkwave npu_tb.vcd
+
+# Clean build artifacts
+make clean
 ```
 
-### Building Documentation
+### Ví dụ sử dụng RTL
+
+```systemverilog
+// Instantiate EdgeNPU trong SoC
+npu_top #(
+    .PE_ROWS     (16),
+    .PE_COLS     (16),
+    .DATA_WIDTH  (8),
+    .AXI_DATA_W  (128),
+    .AXI_ADDR_W  (40)
+) u_edgenpu (
+    .clk         (npu_clk),
+    .rst_n       (npu_rst_n),
+    // AXI4 Master interface
+    .m_axi_*     (axi_master_*),
+    // AXI4-Lite Slave interface  
+    .s_axil_*    (axil_slave_*),
+    // Interrupt
+    .irq         (npu_irq)
+);
+```
+
+### Xây dựng Documentation
 
 ```bash
-cd doc-site
+cd doc-sites
 npm install
 npm run dev      # Development server
 npm run build    # Production build
@@ -136,37 +210,39 @@ npm run build    # Production build
 
 ---
 
-## Performance Benchmarks
+## Benchmark hiệu suất
 
-| Model | Input Size | Latency | Throughput | Power |
-|-------|-----------|---------|------------|-------|
+| Model | Kích thước đầu vào | Latency | Throughput | Power |
+|-------|-------------------|---------|------------|-------|
+| MobileNetV1 | 224×224 | 2.1 ms | 476 FPS | 320 mW |
 | MobileNetV2 | 224×224 | 2.8 ms | 357 FPS | 340 mW |
 | MobileNetV3-Small | 224×224 | 1.5 ms | 667 FPS | 280 mW |
 | EfficientNet-Lite0 | 224×224 | 3.2 ms | 312 FPS | 360 mW |
-| YOLO-Tiny | 416×416 | 12.3 ms | 81 FPS | 450 mW |
 | ResNet-18 | 224×224 | 8.5 ms | 118 FPS | 420 mW |
+| YOLO-Tiny | 416×416 | 12.3 ms | 81 FPS | 450 mW |
+| SSD-MobileNetV2 | 300×300 | 6.8 ms | 147 FPS | 380 mW |
 
-*Benchmarks measured at 800 MHz clock frequency with INT8 quantization*
+*Benchmark được đo tại tần số clock 800 MHz với quantization INT8*
 
 ---
 
-## Documentation
+## Tài liệu
 
-📚 **[Full Documentation](https://buiminhnhut114.github.io/edge-npu-design/)**
+📚 **[Tài liệu đầy đủ](https://buiminhnhut114.github.io/edge-npu-design/)**
 
-- [System Architecture](docs/architecture/system_overview.md)
+- [Kiến trúc hệ thống](docs/architecture/system_overview.md)
 - [Register Map](docs/specification/register_map.md)
-- [Programming Guide](docs/user_guide/programming.md)
-- [Integration Guide](docs/user_guide/integration.md)
+- [Hướng dẫn lập trình](docs/user_guide/programming.md)
+- [Hướng dẫn tích hợp](docs/user_guide/integration.md)
 - [API Reference](docs/api_reference/)
 
 ---
 
-## Technology Stack
+## Công nghệ sử dụng
 
-| Category | Technologies |
-|----------|-------------|
-| **RTL Design** | SystemVerilog, Verilog-2005 |
+| Danh mục | Công nghệ |
+|----------|-----------|
+| **Thiết kế RTL** | SystemVerilog, Verilog-2005 |
 | **Verification** | UVM, SystemVerilog Assertions, Formal |
 | **Synthesis** | Synopsys DC, Cadence Genus |
 | **Simulation** | VCS, Questa, Verilator, Icarus |
@@ -175,35 +251,40 @@ npm run build    # Production build
 
 ---
 
-## Roadmap
+## Lộ trình phát triển
 
-- [x] PE Array (Systolic) implementation
-- [x] Basic activation functions (ReLU, ReLU6)
-- [x] AXI4/AXI4-Lite interface
-- [x] DMA engine
-- [x] Python SDK
-- [ ] Depthwise convolution optimization
-- [ ] FP16/BF16 support
+- [x] Triển khai PE Array (Systolic)
+- [x] Các hàm activation cơ bản (ReLU, ReLU6, Sigmoid, Tanh, Swish, GELU)
+- [x] Giao diện AXI4/AXI4-Lite
+- [x] DMA engine 4-channel
+- [x] Memory subsystem (Weight, Activation, Instruction buffers)
+- [x] Post-processing units (Activation, Pooling, BatchNorm)
+- [x] Convolution controller và Depthwise convolution
+- [x] Element-wise operations (Add, Multiply, Concat, Split)
+- [x] Instruction decoder và scheduler
+- [x] Debug interface
+- [ ] Tối ưu hóa depthwise convolution
+- [ ] Hỗ trợ FP16/BF16 đầy đủ
 - [ ] Power gating
-- [ ] On-device training support
+- [ ] Hỗ trợ on-device training
 
 ---
 
-## Contributing
+## Đóng góp
 
-Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting PRs.
+Chúng tôi hoan nghênh các đóng góp! Vui lòng đọc [Hướng dẫn đóng góp](CONTRIBUTING.md) trước khi gửi PR.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork repository
+2. Tạo feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit thay đổi (`git commit -m 'Add amazing feature'`)
+4. Push lên branch (`git push origin feature/amazing-feature`)
+5. Mở Pull Request
 
 ---
 
-## Citation
+## Trích dẫn
 
-If you use EdgeNPU in your research, please cite:
+Nếu bạn sử dụng EdgeNPU trong nghiên cứu, vui lòng trích dẫn:
 
 ```bibtex
 @misc{edgenpu2026,
@@ -216,16 +297,16 @@ If you use EdgeNPU in your research, please cite:
 
 ---
 
-## License
+## Giấy phép
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Dự án này được cấp phép theo MIT License - xem file [LICENSE](LICENSE) để biết chi tiết.
 
 ---
 
 <div align="center">
 
-**EdgeNPU** — Designed for the Edge, Built for Performance
+**EdgeNPU** — Thiết kế cho Edge, Xây dựng cho Hiệu suất
 
-[⬆ Back to Top](#edgenpu)
+[⬆ Về đầu trang](#edgenpu-design)
 
 </div>
