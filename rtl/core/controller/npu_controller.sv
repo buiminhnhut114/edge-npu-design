@@ -262,8 +262,15 @@ module npu_controller
     end
     assign act_enable = (state == ST_ACTIVATE);
     
-    // Pooling
-    assign pool_type = pooling_t'(inst_reg.flags[1:0]);
+    // Pooling - use case instead of cast for iverilog compatibility
+    always_comb begin
+        case (inst_reg.flags[1:0])
+            2'h0: pool_type = POOL_MAX;
+            2'h1: pool_type = POOL_AVG;
+            2'h2: pool_type = POOL_GLOBAL;
+            default: pool_type = POOL_MAX;
+        endcase
+    end
     assign pool_start = (state == ST_POOL) && (next_state != ST_POOL);
     
     // Memory

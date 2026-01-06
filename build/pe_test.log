@@ -1,0 +1,15 @@
+VCD info: dumpfile tb_pe.vcd opened for output.
+Test 1: Load weight = 5
+Test 2: MAC operations
+  3 * 5 = 15, acc_out = 15
+  4 * 5 = 20, acc_out = 35 (expected 35)
+  -2 * 5 = -10, acc_out = 25 (expected 25)
+Test 3: Clear accumulator
+  After clear, acc_out = 0 (expected 0)
+Test 4: Negative weight = -3
+  7 * (-3) = -21, acc_out = -21
+
+========================================
+All tests completed!
+========================================
+

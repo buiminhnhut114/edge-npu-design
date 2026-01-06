@@ -1,124 +1,71 @@
-# Third-Party IP Cores
+# Third-Party IP Cores for EdgeNPU
 
-This directory contains open-source IP cores integrated into EdgeNPU.
+IP cores tích hợp từ opensource để hỗ trợ EdgeNPU.
 
-## 1. Advanced Debug Interface (`adv_dbg_if`)
+## 1. PE Array (`pe_array/`)
 
-**Source:** [OpenCores / ETH-Zurich](https://github.com/RoaLogic/adv_dbg_if)
+**Source:** GitHub pe_array-master
 
-**License:** LGPL
+**Mục đích:** Cung cấp PE Array với Complex ALU sử dụng DSP48E2
 
-**Description:** Universal Advanced JTAG Debug Interface for SoC debugging.
+### Components chính:
+| File | Chức năng |
+|------|-----------|
+| `pe.v` | Single Processing Element với FSM |
+| `pe_array.v` | Linear array of PEs |
+| `complex_alu.v` | Complex number ALU (4x DSP48E2) |
+| `alu.v` | Basic ALU wrapper cho DSP48E2 |
+| `control.v` | Instruction decoder |
+| `data_mem.v` | Data memory (BRAM) |
+| `sdp_bram.v` | Simple Dual Port BRAM |
+| `SIPO.v`, `PISO.v` | Serial/Parallel converters |
 
-### Files:
-- `adbg_bus_module_core.sv` - Bus interface debug module
-- `adbg_crc32.v` - CRC32 calculation for JTAG
-- `adbg_jsp_module_core.sv` - JTAG Serial Port module
-- `adbg_pkg.sv` - Package definitions
-- `syncflop.v`, `syncreg.v` - CDC synchronizers
-- `bytefifo.v` - Byte FIFO for JSP
-
-### Integration:
-Used in `rtl/debug/npu_debug_if.sv` as reference for JTAG TAP controller.
-
----
-
-## 2. PE Array (`pe_array`)
-
-**Source:** [GitHub pe_array-master](https://github.com/...)
-
-**License:** MIT
-
-**Description:** Linear array of RISC-V style Processing Elements with:
-- Complex number ALU (4x DSP48E2)
-- Instruction ROM
-- Data memory (BRAM)
-- SIPO/PISO for streaming I/O
-
-### Files:
-- `pe.v` - Single Processing Element
-- `pe_array.v` - Array of PEs
-- `complex_alu.v` - Complex number ALU
-- `alu.v` - Basic ALU using DSP48E2
-- `control.v` - Instruction decoder
-- `data_mem.v` - Data memory
-- `inst_rom.v` - Instruction ROM
-- `sdp_bram.v` - Simple Dual Port BRAM
-- `SIPO.v`, `PISO.v` - Serial/Parallel converters
-- `parameters.vh` - Configuration parameters
-
-### Wrappers:
-- `pe_array_wrapper.sv` - Adapts to EdgeNPU interface
+### Wrappers cho EdgeNPU:
+- `pe_array_wrapper.sv` - Adapt PE array interface
 - `complex_alu_wrapper.sv` - Standalone complex ALU
 
-### Specifications:
-| Config | LUTs | FFs | BRAMs | DSPs | Fmax |
-|--------|------|-----|-------|------|------|
-| 8-PE   | 5,278 | 4,844 | 16 | 32 | 600MHz |
-| 32-PE  | 21,584 | 18,775 | 64 | 128 | 600MHz |
-| 128-PE | 80,725 | 71,898 | 256 | 512 | 500MHz |
-
-### Operations Supported:
-| Opcode | Operation | Description |
-|--------|-----------|-------------|
-| 001 | ADD | Complex addition |
-| 010 | SUB | Complex subtraction |
-| 100 | MUL | Complex multiplication |
-| 101 | MULADD | Multiply-accumulate |
-| 110 | MULSUB | Multiply-subtract |
-| 111 | MAX | Maximum (magnitude) |
+### Specs:
+- 8-PE: 5,278 LUTs, 4,844 FFs, 16 BRAMs, 32 DSPs @ 600MHz
+- 32-PE: 21,584 LUTs, 18,775 FFs, 64 BRAMs, 128 DSPs @ 600MHz
 
 ---
 
-## Usage in EdgeNPU
+## 2. Debug Interface (`adbg_*.sv/v`)
 
-### PE Array Integration
+**Source:** OpenCores adv_dbg_if
 
-```systemverilog
-// Use wrapper for NPU integration
-pe_array_wrapper #(
-    .PE_NUM     (8),
-    .DATA_WIDTH (16)
-) u_pe_array_ext (
-    .clk            (clk),
-    .rst_n          (rst_n),
-    .enable         (pe_ext_enable),
-    .start          (pe_ext_start),
-    .done           (pe_ext_done),
-    .busy           (pe_ext_busy),
-    .data_valid     (data_valid),
-    .data_in        (data_in),
-    .data_out_valid (data_out_valid),
-    .data_out       (data_out),
-    .num_iterations (8'd16)
-);
-```
+**Mục đích:** JTAG debug interface cho NPU
 
-### Complex ALU for FP16/Complex Operations
-
-```systemverilog
-// Standalone complex ALU
-complex_alu_wrapper #(
-    .DATA_WIDTH (16)
-) u_complex_alu (
-    .clk       (clk),
-    .rst_n     (rst_n),
-    .opcode    (3'b100),  // MUL
-    .valid_in  (valid_in),
-    .operand_a ({real_a, imag_a}),
-    .operand_b ({real_b, imag_b}),
-    .operand_c (32'b0),
-    .result    (result),
-    .valid_out (valid_out)
-);
-```
+### Files:
+- `adbg_bus_module_core.sv` - Bus debug module
+- `adbg_crc32.v` - CRC32 for JTAG
+- `adbg_pkg.sv` - Package definitions
+- `syncflop.v`, `syncreg.v` - CDC synchronizers
 
 ---
 
-## Notes
+## 3. Memory Models (`memory_models/`)
 
-1. **DSP48E2 Dependency**: The `alu.v` and `complex_alu.v` use Xilinx DSP48E2 primitives. For other FPGAs, these need to be replaced with equivalent DSP blocks.
+**Mục đích:** SRAM models cho simulation và FPGA
 
-2. **BRAM Inference**: `sdp_bram.v` and `data_mem.v` are designed for Xilinx BRAM inference. May need adjustment for other vendors.
+| File | Chức năng |
+|------|-----------|
+| `npu_fpga_sram.v` | FPGA SRAM inference |
+| `npu_ahb_ram_beh.v` | Behavioral AHB RAM |
 
-3. **Clock Domain**: All modules assume single clock domain. CDC handled separately.
+---
+
+## 4. Bus Components (`bus_components/`)
+
+**Mục đích:** Kết nối NPU với memory
+
+| File | Chức năng |
+|------|-----------|
+| `npu_ahb_to_sram.v` | AHB to SRAM interface |
+
+---
+
+## Lưu ý
+
+- `alu.v` và `complex_alu.v` sử dụng Xilinx DSP48E2. Cần modify cho FPGA khác.
+- BRAM modules được thiết kế cho Xilinx inference.

@@ -28,7 +28,6 @@ module tb_pe;
     logic signed [DATA_WIDTH-1:0]   data_in;
     logic signed [WEIGHT_WIDTH-1:0] weight_in;
     logic signed [DATA_WIDTH-1:0]   data_out;
-    logic signed [WEIGHT_WIDTH-1:0] weight_out;
     logic signed [ACC_WIDTH-1:0]    acc_out;
     logic                           acc_valid;
     
@@ -49,7 +48,6 @@ module tb_pe;
         .data_in      (data_in),
         .weight_in    (weight_in),
         .data_out     (data_out),
-        .weight_out   (weight_out),
         .acc_out      (acc_out),
         .acc_valid    (acc_valid)
     );

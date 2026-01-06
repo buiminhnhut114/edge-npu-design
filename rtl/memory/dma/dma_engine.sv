@@ -122,8 +122,12 @@ module dma_engine
         next_state = state;
         case (state)
             IDLE: begin
-                if (start)
-                    next_state = is_read ? READ_ADDR : WRITE_ADDR;
+                if (start) begin
+                    if (is_read)
+                        next_state = READ_ADDR;
+                    else
+                        next_state = WRITE_ADDR;
+                end
             end
             READ_ADDR: begin
                 if (m_axi_arvalid && m_axi_arready)

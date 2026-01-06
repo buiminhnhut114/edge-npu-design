@@ -1,0 +1,15 @@
+QuestaSim-64 vlog 2021.2_1 Compiler 2021.05 May 15 2021
+Start time: 02:20:12 on Jan 07,2026
+vlog -sv -work /home/minhnhut/Documents/EdgeNPU/build/uvm/work "+incdir+/home/minhnhut/Documents/EdgeNPU/verification/uvm" "+incdir+/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent" "+incdir+/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences" "+incdir+/home/minhnhut/Documents/EdgeNPU/verification/uvm/env" "+incdir+/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests" "+incdir+/home/minhnhut/Documents/EdgeNPU/rtl/top" /home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_if.sv /home/minhnhut/Documents/EdgeNPU/verification/uvm/npu_pkg.sv /home/minhnhut/Documents/EdgeNPU/verification/uvm/tb/npu_uvm_tb.sv -l /home/minhnhut/Documents/EdgeNPU/build/uvm/compile_uvm.log 
+-- Compiling interface axil_if
+-- Compiling package npu_uvm_pkg
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+** Note: (vlog-2286) /home/minhnhut/Documents/EdgeNPU/verification/uvm/npu_pkg.sv(12): Using implicit +incdir+/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+-- Importing package npu_pkg
+-- Compiling module npu_uvm_tb
+-- Importing package npu_uvm_pkg
+
+Top level modules:
+	npu_uvm_tb
+End time: 02:20:12 on Jan 07,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0

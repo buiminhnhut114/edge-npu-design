@@ -195,9 +195,15 @@ module npu_top
             reg_dma_src   <= '0;
             reg_dma_dst   <= '0;
             reg_dma_len   <= '0;
-        end else if (s_axil_awvalid && s_axil_wvalid && s_axil_awready) begin
+        end else if (s_axil_awvalid && s_axil_wvalid && s_axil_awready && s_axil_wready) begin
+            // Debug: trace write operations
+            $display("[NPU_TOP] @%0t: AXI-Lite Write: addr=0x%08h, data=0x%08h", 
+                     $time, s_axil_awaddr, s_axil_wdata);
             case (s_axil_awaddr[11:0])
-                REG_CTRL:       reg_ctrl     <= s_axil_wdata;
+                REG_CTRL: begin
+                    reg_ctrl     <= s_axil_wdata;
+                    $display("[NPU_TOP] @%0t: reg_ctrl <= 0x%08h", $time, s_axil_wdata);
+                end
                 REG_IRQ_EN:     reg_irq_en   <= s_axil_wdata;
                 REG_DMA_CTRL:   reg_dma_ctrl <= s_axil_wdata;
                 REG_DMA_SRC:    reg_dma_src  <= s_axil_wdata;
@@ -205,6 +211,12 @@ module npu_top
                 REG_DMA_LEN:    reg_dma_len  <= s_axil_wdata;
             endcase
         end
+        
+        // Debug: trace valid signals every cycle they are asserted
+        if ((s_axil_awvalid || s_axil_wvalid) && $time > 50000 && $time < 150000)
+            $display("[NPU_TOP_DBG] @%0t: awvalid=%b wvalid=%b awready=%b wready=%b addr=0x%04h data=0x%08h",
+                     $time, s_axil_awvalid, s_axil_wvalid, s_axil_awready, s_axil_wready, 
+                     s_axil_awaddr[15:0], s_axil_wdata);
         
         // Auto-clear start bits
         if (npu_start)
@@ -233,29 +245,25 @@ module npu_top
         end
     end
     
-    // AXI-Lite Read
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            s_axil_rdata <= '0;
-        end else if (s_axil_arvalid && s_axil_arready) begin
-            case (s_axil_araddr[11:0])
-                REG_CTRL:       s_axil_rdata <= reg_ctrl;
-                REG_STATUS:     s_axil_rdata <= npu_status;
-                REG_IRQ_EN:     s_axil_rdata <= reg_irq_en;
-                REG_IRQ_STATUS: s_axil_rdata <= reg_irq_status;
-                REG_VERSION:    s_axil_rdata <= NPU_VERSION;
-                REG_CONFIG:     s_axil_rdata <= {16'(PE_ROWS), 16'(PE_COLS)};
-                REG_DMA_CTRL:   s_axil_rdata <= reg_dma_ctrl;
-                REG_DMA_STATUS: s_axil_rdata <= {30'b0, dma_done, dma_busy};
-                REG_DMA_SRC:    s_axil_rdata <= reg_dma_src;
-                REG_DMA_DST:    s_axil_rdata <= reg_dma_dst;
-                REG_DMA_LEN:    s_axil_rdata <= reg_dma_len;
-                default:        s_axil_rdata <= '0;
-            endcase
-        end
+    // AXI-Lite Read - combinational decode for immediate response
+    always_comb begin
+        case (s_axil_araddr[11:0])
+            REG_CTRL:       s_axil_rdata = reg_ctrl;
+            REG_STATUS:     s_axil_rdata = npu_status;
+            REG_IRQ_EN:     s_axil_rdata = reg_irq_en;
+            REG_IRQ_STATUS: s_axil_rdata = reg_irq_status;
+            REG_VERSION:    s_axil_rdata = NPU_VERSION;
+            REG_CONFIG:     s_axil_rdata = {16'(PE_ROWS), 16'(PE_COLS)};
+            REG_DMA_CTRL:   s_axil_rdata = reg_dma_ctrl;
+            REG_DMA_STATUS: s_axil_rdata = {30'b0, dma_done, dma_busy};
+            REG_DMA_SRC:    s_axil_rdata = reg_dma_src;
+            REG_DMA_DST:    s_axil_rdata = reg_dma_dst;
+            REG_DMA_LEN:    s_axil_rdata = reg_dma_len;
+            default:        s_axil_rdata = '0;
+        endcase
     end
     
-    // AXI-Lite handshake
+    // AXI-Lite handshake - always ready
     assign s_axil_awready = 1'b1;
     assign s_axil_wready  = 1'b1;
     assign s_axil_bresp   = 2'b00;

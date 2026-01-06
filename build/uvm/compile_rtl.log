@@ -1,0 +1,27 @@
+QuestaSim-64 vlog 2021.2_1 Compiler 2021.05 May 15 2021
+Start time: 02:20:12 on Jan 07,2026
+vlog -sv -work /home/minhnhut/Documents/EdgeNPU/build/uvm/work "+incdir+/home/minhnhut/Documents/EdgeNPU/rtl/top" /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_pkg.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/activation/activation_unit.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/pooling/pooling_unit.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv /home/minhnhut/Documents/EdgeNPU/rtl/memory/sram/sram_sp.sv /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv /home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv -l /home/minhnhut/Documents/EdgeNPU/build/uvm/compile_rtl.log 
+-- Compiling package npu_pkg
+-- Compiling module pe
+-- Importing package npu_pkg
+-- Compiling module pe_array
+** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv(24): (vlog-13314) Defaulting port 'data_in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv(25): (vlog-13314) Defaulting port 'weight_in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+-- Compiling module activation_unit
+-- Compiling module pooling_unit
+-- Compiling module npu_controller
+** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv(23): (vlog-13314) Defaulting port 'instruction' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+-- Compiling module sram_sp
+-- Compiling module weight_buffer
+-- Compiling module activation_buffer
+-- Compiling module dma_engine
+** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv(22): (vlog-13314) Defaulting port 'descriptor' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+-- Compiling package npu_pkg
+** Warning: ** while parsing file included at /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(6)
+** at /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_pkg.sv(9): (vlog-2275) Existing package 'npu_pkg' at line 9 will be overwritten.
+-- Compiling module npu_top
+
+Top level modules:
+	npu_top
+End time: 02:20:12 on Jan 07,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 5
