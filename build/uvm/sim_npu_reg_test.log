@@ -1,15 +1,6 @@
 # vsim -c -L /home/minhnhut/Documents/EdgeNPU/build/uvm/work -work /home/minhnhut/Documents/EdgeNPU/build/uvm/work npu_uvm_tb "+UVM_TESTNAME=npu_reg_test" "+UVM_VERBOSITY=UVM_MEDIUM" -do "run -all; quit -f" -l /home/minhnhut/Documents/EdgeNPU/build/uvm/sim_npu_reg_test.log 
-# Start time: 02:19:32 on Jan 07,2026
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(413): (vopt-2241) Connection width does not match width of port 'a_addr'. The port definition is at: /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv(20).
-# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(413): (vopt-2241) Connection width does not match width of port 'b_addr'. The port definition is at: /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv(26).
-# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(394): (vopt-2241) Connection width does not match width of port 'wr_addr'. The port definition is at: /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv(19).
-# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(394): (vopt-2241) Connection width does not match width of port 'rd_addr'. The port definition is at: /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv(24).
-# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv(23): (vopt-13314) Defaulting port 'instruction' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
-# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv(24): (vopt-13314) Defaulting port 'data_in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
-# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv(25): (vopt-13314) Defaulting port 'weight_in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
-# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv(22): (vopt-13314) Defaulting port 'descriptor' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=8.
+# Start time: 02:22:57 on Jan 07,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt
 # //  Questa Sim-64
 # //  Version 2021.2_1 linux_x86_64 May 15 2021
 # //
@@ -158,5 +149,5 @@
 # [UVMTOP]     1
 # ** Note: $finish    : /home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/linux_x86_64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 526 ns  Iteration: 54  Instance: /npu_uvm_tb
-# End time: 02:19:36 on Jan 07,2026, Elapsed time: 0:00:04
-# Errors: 0, Warnings: 8
+# End time: 02:23:00 on Jan 07,2026, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0

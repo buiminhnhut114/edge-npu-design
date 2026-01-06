@@ -196,14 +196,8 @@ module npu_top
             reg_dma_dst   <= '0;
             reg_dma_len   <= '0;
         end else if (s_axil_awvalid && s_axil_wvalid && s_axil_awready && s_axil_wready) begin
-            // Debug: trace write operations
-            $display("[NPU_TOP] @%0t: AXI-Lite Write: addr=0x%08h, data=0x%08h", 
-                     $time, s_axil_awaddr, s_axil_wdata);
             case (s_axil_awaddr[11:0])
-                REG_CTRL: begin
-                    reg_ctrl     <= s_axil_wdata;
-                    $display("[NPU_TOP] @%0t: reg_ctrl <= 0x%08h", $time, s_axil_wdata);
-                end
+                REG_CTRL:       reg_ctrl     <= s_axil_wdata;
                 REG_IRQ_EN:     reg_irq_en   <= s_axil_wdata;
                 REG_DMA_CTRL:   reg_dma_ctrl <= s_axil_wdata;
                 REG_DMA_SRC:    reg_dma_src  <= s_axil_wdata;
@@ -211,12 +205,6 @@ module npu_top
                 REG_DMA_LEN:    reg_dma_len  <= s_axil_wdata;
             endcase
         end
-        
-        // Debug: trace valid signals every cycle they are asserted
-        if ((s_axil_awvalid || s_axil_wvalid) && $time > 50000 && $time < 150000)
-            $display("[NPU_TOP_DBG] @%0t: awvalid=%b wvalid=%b awready=%b wready=%b addr=0x%04h data=0x%08h",
-                     $time, s_axil_awvalid, s_axil_wvalid, s_axil_awready, s_axil_wready, 
-                     s_axil_awaddr[15:0], s_axil_wdata);
         
         // Auto-clear start bits
         if (npu_start)

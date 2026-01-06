@@ -1,5 +1,5 @@
 QuestaSim-64 vlog 2021.2_1 Compiler 2021.05 May 15 2021
-Start time: 02:20:12 on Jan 07,2026
+Start time: 02:23:56 on Jan 07,2026
 vlog -sv -work /home/minhnhut/Documents/EdgeNPU/build/uvm/work "+incdir+/home/minhnhut/Documents/EdgeNPU/rtl/top" /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_pkg.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/activation/activation_unit.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/pooling/pooling_unit.sv /home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv /home/minhnhut/Documents/EdgeNPU/rtl/memory/sram/sram_sp.sv /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv /home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv -l /home/minhnhut/Documents/EdgeNPU/build/uvm/compile_rtl.log 
 -- Compiling package npu_pkg
 -- Compiling module pe
@@ -23,5 +23,5 @@ vlog -sv -work /home/minhnhut/Documents/EdgeNPU/build/uvm/work "+incdir+/home/mi
 
 Top level modules:
 	npu_top
-End time: 02:20:12 on Jan 07,2026, Elapsed time: 0:00:00
+End time: 02:23:56 on Jan 07,2026, Elapsed time: 0:00:00
 Errors: 0, Warnings: 5

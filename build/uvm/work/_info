@@ -20,6 +20,7 @@ R0
 R0
 R0
 R0
+R0
 !s11f vlog 2021.2_1 2021.05, May 15 2021
 13
 !s112 1.1
@@ -30,10 +31,10 @@ cModel Technology
 Z1 d/home/minhnhut/Documents/EdgeNPU
 T_opt
 !s11d npu_uvm_pkg /home/minhnhut/Documents/EdgeNPU/build/uvm/work 1 axil_if 1 /home/minhnhut/Documents/EdgeNPU/build/uvm/work 
-!s110 1767727172
-VSTn8UoU<oNAXDeRhXdJz<2
+!s110 1767727422
+VV;nlz`hBZanEl4CcT5G:I3
 04 10 4 work npu_uvm_tb fast 0
-=1-000ae431a4f1-695d6044-6ca5d-101ff
+=1-000ae431a4f1-695d613d-ac5bf-109e9
 !s124 OEM100
 o-quiet -auto_acc_if_foreign -work /home/minhnhut/Documents/EdgeNPU/build/uvm/work -L /home/minhnhut/Documents/EdgeNPU/build/uvm/work
 Z2 tCvgOpt 0
@@ -43,7 +44,7 @@ R1
 vactivation_buffer
 Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
 Z4 DXx4 work 7 npu_pkg 0 22 i8@[^FnbB93HL03L0NEY_2
-Z5 !s110 1767727212
+Z5 !s110 1767727436
 !i10b 1
 !s100 U34I>C9N_bP?Qn;j_PA_41
 IgR_HEK4oR@EXa49I5n<HC0
@@ -52,14 +53,14 @@ R1
 w1767695782
 8/home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv
-!i122 60
+!i122 66
 L0 6 62
 Z6 VDg1SIo80bB@j0V0VzS_@n1
 Z7 OL;L;2021.2_1;73
 r1
 !s85 0
 31
-Z8 !s108 1767727212.000000
+Z8 !s108 1767727436.000000
 Z9 !s107 /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv|/home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv|/home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv|/home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv|/home/minhnhut/Documents/EdgeNPU/rtl/memory/sram/sram_sp.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/pooling/pooling_unit.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/activation/activation_unit.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe.sv|/home/minhnhut/Documents/EdgeNPU/rtl/top/npu_pkg.sv|
 Z10 !s90 -sv|-work|/home/minhnhut/Documents/EdgeNPU/build/uvm/work|+incdir+/home/minhnhut/Documents/EdgeNPU/rtl/top|/home/minhnhut/Documents/EdgeNPU/rtl/top/npu_pkg.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/activation/activation_unit.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/pooling/pooling_unit.sv|/home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv|/home/minhnhut/Documents/EdgeNPU/rtl/memory/sram/sram_sp.sv|/home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv|/home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv|/home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv|/home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv|-l|/home/minhnhut/Documents/EdgeNPU/build/uvm/compile_rtl.log|
 !i113 0
@@ -78,7 +79,7 @@ R1
 w1767695704
 8/home/minhnhut/Documents/EdgeNPU/rtl/core/activation/activation_unit.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/core/activation/activation_unit.sv
-!i122 60
+!i122 66
 L0 6 114
 R6
 R7
@@ -103,7 +104,7 @@ R1
 w1767725281
 8/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_if.sv
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_if.sv
-!i122 61
+!i122 67
 L0 8 0
 R6
 R7
@@ -129,7 +130,7 @@ R1
 w1767724632
 8/home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv
-!i122 60
+!i122 66
 L0 6 262
 R6
 R7
@@ -155,7 +156,7 @@ R1
 w1767724655
 8/home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv
-!i122 60
+!i122 66
 L0 6 286
 R6
 R7
@@ -180,7 +181,7 @@ R1
 w1767695289
 8/home/minhnhut/Documents/EdgeNPU/rtl/top/npu_pkg.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/top/npu_pkg.sv
-!i122 60
+!i122 66
 Z15 L0 9 0
 Vi8@[^FnbB93HL03L0NEY_2
 R7
@@ -206,7 +207,7 @@ R1
 w1767727106
 8/home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv
-!i122 60
+!i122 66
 L0 8 506
 R6
 R7
@@ -225,27 +226,27 @@ Xnpu_uvm_pkg
 R3
 Z16 DXx6 mtiUvm 7 uvm_pkg 0 22 8V[`8]Q0W57le7Z>zYaAj1
 R4
-R5
+Z17 !s110 1767727437
 !i10b 1
-!s100 ]FVK4ljOMn9A43f72l>oa2
-I>Cd]eC<WdcaAFd6AQ3ZIk0
+!s100 0i8]USdE5aSDW8mR7Cjg81
+IBA8eMkYK4`8TCmU8cSb6D2
 S1
 R1
-w1767727169
+w1767727405
 8/home/minhnhut/Documents/EdgeNPU/verification/uvm/npu_pkg.sv
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/npu_pkg.sv
-Z17 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh
-Z18 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh
-Z19 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh
-Z20 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh
-Z21 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh
-Z22 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh
-Z23 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh
-Z24 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh
-Z25 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh
-Z26 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh
-Z27 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh
-Z28 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh
+Z18 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh
+Z19 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh
+Z20 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh
+Z21 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh
+Z22 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh
+Z23 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh
+Z24 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh
+Z25 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh
+Z26 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh
+Z27 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh
+Z28 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh
+Z29 F/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_seq_item.sv
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_driver.sv
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_monitor.sv
@@ -261,15 +262,15 @@ F/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_base_test.sv
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_reg_test.sv
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_sanity_test.sv
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_conv_test.sv
-!i122 61
+!i122 67
 R15
-V>Cd]eC<WdcaAFd6AQ3ZIk0
+VBA8eMkYK4`8TCmU8cSb6D2
 R7
 r1
 !s85 0
 31
 R8
-Z29 !s107 /home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_conv_test.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_sanity_test.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_reg_test.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_base_test.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/env/npu_env.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/env/npu_coverage.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/env/npu_scoreboard.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_conv_seq.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_reg_seq.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_base_seq.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_seq_item.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_agent.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_monitor.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_driver.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_seq_item.sv|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|/home/minhnhut/Documents/EdgeNPU/verification/uvm/tb/npu_uvm_tb.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/npu_pkg.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_if.sv|
+Z30 !s107 /home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_conv_test.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_sanity_test.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_reg_test.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_base_test.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/env/npu_env.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/env/npu_coverage.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/env/npu_scoreboard.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_conv_seq.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_reg_seq.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_base_seq.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_seq_item.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_agent.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_monitor.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_driver.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_seq_item.sv|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|/home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|/home/minhnhut/Documents/EdgeNPU/verification/uvm/tb/npu_uvm_tb.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/npu_pkg.sv|/home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_if.sv|
 R13
 !i113 0
 R11
@@ -279,8 +280,8 @@ vnpu_uvm_tb
 R3
 R16
 R4
-DXx4 work 11 npu_uvm_pkg 0 22 >Cd]eC<WdcaAFd6AQ3ZIk0
-R5
+DXx4 work 11 npu_uvm_pkg 0 22 BA8eMkYK4`8TCmU8cSb6D2
+R17
 !i10b 1
 !s100 6aNeaYGlFGLiVBh`G^Hca0
 IeV7^LMZXNM<;`XSie7I^H3
@@ -289,7 +290,6 @@ R1
 w1767724942
 8/home/minhnhut/Documents/EdgeNPU/verification/uvm/tb/npu_uvm_tb.sv
 F/home/minhnhut/Documents/EdgeNPU/verification/uvm/tb/npu_uvm_tb.sv
-R17
 R18
 R19
 R20
@@ -301,7 +301,8 @@ R25
 R26
 R27
 R28
-!i122 61
+R29
+!i122 67
 L0 8 6634
 R6
 R7
@@ -309,7 +310,7 @@ r1
 !s85 0
 31
 R8
-R29
+R30
 R13
 !i113 0
 R11
@@ -327,7 +328,7 @@ R1
 w1767695686
 8/home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe.sv
-!i122 60
+!i122 66
 L0 6 88
 R6
 R7
@@ -353,7 +354,7 @@ R1
 w1767695693
 8/home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv
-!i122 60
+!i122 66
 L0 6 85
 R6
 R7
@@ -379,7 +380,7 @@ R1
 w1767695727
 8/home/minhnhut/Documents/EdgeNPU/rtl/core/pooling/pooling_unit.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/core/pooling/pooling_unit.sv
-!i122 60
+!i122 66
 L0 6 171
 R6
 R7
@@ -404,7 +405,7 @@ R1
 w1767695771
 8/home/minhnhut/Documents/EdgeNPU/rtl/memory/sram/sram_sp.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/memory/sram/sram_sp.sv
-!i122 60
+!i122 66
 L0 6 35
 R6
 R7
@@ -430,7 +431,7 @@ R1
 w1767695776
 8/home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv
 F/home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv
-!i122 60
+!i122 66
 L0 6 60
 R6
 R7
