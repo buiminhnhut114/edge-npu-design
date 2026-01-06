@@ -466,19 +466,19 @@ export const ArchitectureDiagram: React.FC<DiagramProps> = ({ type, className = 
       <rect x="50" y="410" width="700" height="150" fill="#f9fafb" stroke="#6b7280" strokeWidth="2" rx="5"/>
       
       {/* Pseudo-code */}
-      <text x="70" y="430" className="text-sm font-mono fill-gray-800">for (oc_tile = 0; oc_tile &lt; output_channels; oc_tile += 16) {</text>
-      <text x="90" y="445" className="text-sm font-mono fill-gray-800">for (ic_tile = 0; ic_tile &lt; input_channels; ic_tile += 16) {</text>
+      <text x="70" y="430" className="text-sm font-mono fill-gray-800">for (oc_tile = 0; oc_tile &lt; output_channels; oc_tile += 16) {'{'}</text>
+      <text x="90" y="445" className="text-sm font-mono fill-gray-800">for (ic_tile = 0; ic_tile &lt; input_channels; ic_tile += 16) {'{'}</text>
       <text x="110" y="460" className="text-sm font-mono fill-blue-600">// Load weight tile [16 x 16 x K x K]</text>
       <text x="110" y="475" className="text-sm font-mono fill-gray-800">DMA.load(weights[oc_tile:oc_tile+16, ic_tile:ic_tile+16, :, :])</text>
       
-      <text x="110" y="495" className="text-sm font-mono fill-gray-800">for (oh_tile = 0; oh_tile &lt; output_height; oh_tile += TILE_H) {</text>
-      <text x="130" y="510" className="text-sm font-mono fill-gray-800">for (ow_tile = 0; ow_tile &lt; output_width; ow_tile += TILE_W) {</text>
+      <text x="110" y="495" className="text-sm font-mono fill-gray-800">for (oh_tile = 0; oh_tile &lt; output_height; oh_tile += TILE_H) {'{'}</text>
+      <text x="130" y="510" className="text-sm font-mono fill-gray-800">for (ow_tile = 0; ow_tile &lt; output_width; ow_tile += TILE_W) {'{'}</text>
       <text x="150" y="525" className="text-sm font-mono fill-green-600">// Compute on PE array</text>
       <text x="150" y="540" className="text-sm font-mono fill-gray-800">PE_Array.compute(); // 16x16 tile processing</text>
-      <text x="130" y="555" className="text-sm font-mono fill-gray-800">}</text>
-      <text x="110" y="570" className="text-sm font-mono fill-gray-800">}</text>
-      <text x="90" y="585" className="text-sm font-mono fill-gray-800">}</text>
-      <text x="70" y="600" className="text-sm font-mono fill-gray-800">}</text>
+      <text x="130" y="555" className="text-sm font-mono fill-gray-800">{'}'}</text>
+      <text x="110" y="570" className="text-sm font-mono fill-gray-800">{'}'}</text>
+      <text x="90" y="585" className="text-sm font-mono fill-gray-800">{'}'}</text>
+      <text x="70" y="600" className="text-sm font-mono fill-gray-800">{'}'}</text>
       
       {/* Arrow markers */}
       <defs>
