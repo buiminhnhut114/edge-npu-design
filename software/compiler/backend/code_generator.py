@@ -8,9 +8,7 @@ from dataclasses import dataclass
 import struct
 import numpy as np
 
-import sys
-sys.path.append('..')
-from frontend.ir_builder import IRGraph, IRNode, IRTensor, IROpType
+from ..frontend.ir_builder import IRGraph, IRNode, IRTensor, IROpType
 
 from .instruction_emitter import InstructionEmitter
 from .memory_allocator import MemoryAllocator

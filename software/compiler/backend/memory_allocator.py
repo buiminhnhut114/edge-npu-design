@@ -7,9 +7,7 @@ from typing import Dict, List, Tuple, Optional, Set
 from dataclasses import dataclass, field
 from enum import Enum, auto
 
-import sys
-sys.path.append('..')
-from frontend.ir_builder import IRGraph, IRNode, IRTensor, IROpType
+from ..frontend.ir_builder import IRGraph, IRNode, IRTensor, IROpType
 
 
 class MemoryRegion(Enum):

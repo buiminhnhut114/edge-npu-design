@@ -24,15 +24,15 @@ package npu_pkg;
     parameter int OUTPUT_WIDTH  = 8;        // Output data width
     
     // Memory Configuration
-    parameter int WEIGHT_BUF_SIZE   = 256 * 1024;   // 256 KB
-    parameter int ACT_BUF_SIZE      = 256 * 1024;   // 256 KB
-    parameter int INST_BUF_SIZE     = 16 * 1024;    // 16 KB
+    parameter int WEIGHT_BUF_SIZE   = 262144;   // 256 KB
+    parameter int ACT_BUF_SIZE      = 262144;   // 256 KB
+    parameter int INST_BUF_SIZE     = 16384;    // 16 KB
     
     // AXI Configuration
     parameter int AXI_DATA_WIDTH    = 128;
     parameter int AXI_ADDR_WIDTH    = 40;
     parameter int AXI_ID_WIDTH      = 8;
-    parameter int AXI_STRB_WIDTH    = AXI_DATA_WIDTH / 8;
+    parameter int AXI_STRB_WIDTH    = 16;  // AXI_DATA_WIDTH / 8
     
     // AXI-Lite Configuration
     parameter int AXIL_DATA_WIDTH   = 32;
@@ -157,9 +157,9 @@ package npu_pkg;
     localparam logic [31:0] NPU_VERSION = 32'h0001_0000; // v1.0.0
     
     //=========================================================================
-    // Functions
+    // Functions (Simulation only - not synthesizable)
     //=========================================================================
-    
+`ifdef SIMULATION
     // Calculate output size after convolution
     function automatic int calc_conv_output_size(
         input int input_size,
@@ -187,6 +187,7 @@ package npu_pkg;
         else
             return value[31:0];
     endfunction
+`endif
 
 endpackage
 

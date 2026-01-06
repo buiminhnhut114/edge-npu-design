@@ -7,9 +7,7 @@ from abc import ABC, abstractmethod
 from typing import List, Optional, Set
 import numpy as np
 
-import sys
-sys.path.append('..')
-from frontend.ir_builder import IRGraph, IRNode, IRTensor, IROpType, DataType
+from ..frontend.ir_builder import IRGraph, IRNode, IRTensor, IROpType, DataType
 
 
 class OptimizationPass(ABC):

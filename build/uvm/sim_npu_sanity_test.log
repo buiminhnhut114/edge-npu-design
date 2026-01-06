@@ -1,6 +1,15 @@
 # vsim -c -L /home/minhnhut/Documents/EdgeNPU/build/uvm/work -work /home/minhnhut/Documents/EdgeNPU/build/uvm/work npu_uvm_tb "+UVM_TESTNAME=npu_sanity_test" "+UVM_VERBOSITY=UVM_MEDIUM" -do "run -all; quit -f" -l /home/minhnhut/Documents/EdgeNPU/build/uvm/sim_npu_sanity_test.log 
-# Start time: 02:20:06 on Jan 07,2026
-# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Start time: 03:39:03 on Jan 07,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(401): (vopt-2241) Connection width does not match width of port 'a_addr'. The port definition is at: /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv(20).
+# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(401): (vopt-2241) Connection width does not match width of port 'b_addr'. The port definition is at: /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/activation_buffer.sv(26).
+# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(382): (vopt-2241) Connection width does not match width of port 'wr_addr'. The port definition is at: /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv(19).
+# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/top/npu_top.sv(382): (vopt-2241) Connection width does not match width of port 'rd_addr'. The port definition is at: /home/minhnhut/Documents/EdgeNPU/rtl/memory/buffer/weight_buffer.sv(24).
+# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/controller/npu_controller.sv(23): (vopt-13314) Defaulting port 'instruction' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv(24): (vopt-13314) Defaulting port 'data_in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/core/pe_array/pe_array.sv(25): (vopt-13314) Defaulting port 'weight_in' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: /home/minhnhut/Documents/EdgeNPU/rtl/memory/dma/dma_engine.sv(22): (vopt-13314) Defaulting port 'descriptor' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=8.
 # //  Questa Sim-64
 # //  Version 2021.2_1 linux_x86_64 May 15 2021
 # //
@@ -80,10 +89,6 @@
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_driver.sv(140) @ 245000: uvm_test_top.env.axil_agt.driver [AXIL_DRV] Read: addr=0x00000010, data=0x00010000
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_base_seq.sv(46) @ 245000: uvm_test_top.env.axil_agt.sequencer@@seq [NPU_SEQ] Read: addr=0x00000010, data=0x00010000
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_sanity_test.sv(38) @ 245000: uvm_test_top [SANITY_TEST] Test 2: Enable NPU
-# [NPU_TOP] @255000: AXI-Lite Write: addr=0x00000000, data=0x00000001
-# [NPU_TOP] @255000: reg_ctrl <= 0x00000001
-# [NPU_TOP] @265000: AXI-Lite Write: addr=0x00000000, data=0x00000001
-# [NPU_TOP] @265000: reg_ctrl <= 0x00000001
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_driver.sv(103) @ 285000: uvm_test_top.env.axil_agt.driver [AXIL_DRV] Write: addr=0x00000000, data=0x00000001
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_base_seq.sv(33) @ 285000: uvm_test_top.env.axil_agt.sequencer@@seq [NPU_SEQ] Write: addr=0x00000000, data=0x00000001
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_driver.sv(140) @ 335000: uvm_test_top.env.axil_agt.driver [AXIL_DRV] Read: addr=0x00000000, data=0x00000001
@@ -93,16 +98,8 @@
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_base_seq.sv(46) @ 385000: uvm_test_top.env.axil_agt.sequencer@@seq [NPU_SEQ] Read: addr=0x00000004, data=0x00000000
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_sanity_test.sv(47) @ 385000: uvm_test_top [SANITY_TEST] Status: 0x00000000
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_sanity_test.sv(50) @ 385000: uvm_test_top [SANITY_TEST] Test 4: Reset NPU
-# [NPU_TOP] @395000: AXI-Lite Write: addr=0x00000000, data=0x00000004
-# [NPU_TOP] @395000: reg_ctrl <= 0x00000004
-# [NPU_TOP] @405000: AXI-Lite Write: addr=0x00000000, data=0x00000004
-# [NPU_TOP] @405000: reg_ctrl <= 0x00000004
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_driver.sv(103) @ 425000: uvm_test_top.env.axil_agt.driver [AXIL_DRV] Write: addr=0x00000000, data=0x00000004
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_base_seq.sv(33) @ 425000: uvm_test_top.env.axil_agt.sequencer@@seq [NPU_SEQ] Write: addr=0x00000000, data=0x00000004
-# [NPU_TOP] @435000: AXI-Lite Write: addr=0x00000000, data=0x00000000
-# [NPU_TOP] @435000: reg_ctrl <= 0x00000000
-# [NPU_TOP] @445000: AXI-Lite Write: addr=0x00000000, data=0x00000000
-# [NPU_TOP] @445000: reg_ctrl <= 0x00000000
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/agents/axil_agent/axil_driver.sv(103) @ 465000: uvm_test_top.env.axil_agt.driver [AXIL_DRV] Write: addr=0x00000000, data=0x00000000
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/sequences/npu_base_seq.sv(33) @ 465000: uvm_test_top.env.axil_agt.sequencer@@seq [NPU_SEQ] Write: addr=0x00000000, data=0x00000000
 # UVM_INFO /home/minhnhut/Documents/EdgeNPU/verification/uvm/tests/npu_sanity_test.sv(53) @ 465000: uvm_test_top [SANITY_TEST] Sanity test complete
@@ -147,5 +144,5 @@
 # [uvm_sequence_base]     1
 # ** Note: $finish    : /home/minhnhut/Downloads/mentor_graphic/questasim/install/questasim/linux_x86_64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 466 ns  Iteration: 54  Instance: /npu_uvm_tb
-# End time: 02:20:08 on Jan 07,2026, Elapsed time: 0:00:02
-# Errors: 0, Warnings: 0
+# End time: 03:39:08 on Jan 07,2026, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 8

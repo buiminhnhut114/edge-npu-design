@@ -80,7 +80,7 @@ sim_full: $(BUILD_DIR)
 
 test: $(BUILD_DIR)
 	@echo "Running quick tests..."
-	@./scripts/simulation/run_quick_test.sh
+	@./flow/scripts/simulation/run_quick_test.sh
 
 #------------------------------------------------------------------------------
 # Linting

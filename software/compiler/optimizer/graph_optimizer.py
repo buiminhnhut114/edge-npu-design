@@ -6,9 +6,7 @@ Main optimizer that runs optimization passes
 from typing import List, Optional, Dict, Any
 import time
 
-import sys
-sys.path.append('..')
-from frontend.ir_builder import IRGraph
+from ..frontend.ir_builder import IRGraph
 
 from .passes import (
     OptimizationPass,

@@ -1,0 +1,37 @@
+{
+    "DESIGN_NAME": "npu_top",
+    "VERILOG_FILES": [
+        "dir::src/*.v",
+        "dir::src/*.sv"
+    ],
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 10.0,
+    "DESIGN_IS_CORE": true,
+    "FP_SIZING": "absolute",
+    "DIE_AREA": "0 0 2000 2000",
+    "CORE_AREA": "20 20 1980 1980",
+    "FP_PIN_ORDER_CFG": "dir::pin_order.cfg",
+    "PL_TARGET_DENSITY": 0.55,
+    "PL_TIME_DRIVEN": true,
+    "PL_ROUTABILITY_DRIVEN": true,
+    "GRT_ADJUSTMENT": 0.1,
+    "GRT_OVERFLOW_ITERS": 50,
+    "SYNTH_STRATEGY": "AREA 0",
+    "MAX_FANOUT_CONSTRAINT": 6,
+    "RT_MAX_LAYER": "met4",
+    "GRT_REPAIR_ANTENNAS": true,
+    "RUN_HEURISTIC_DIODE_INSERTION": true,
+    "DIODE_ON_PORTS": "in",
+    "RUN_CVC": false,
+    "RUN_KLAYOUT_XOR": false,
+    "RUN_KLAYOUT_DRC": false,
+    "RUN_LINTER": false,
+    "pdk::sky130*": {
+        "CLOCK_PERIOD": 20.0,
+        "FP_CORE_UTIL": 40,
+        "PL_TARGET_DENSITY": 0.50,
+        "scl::sky130_fd_sc_hd": {
+            "CLOCK_PERIOD": 25.0
+        }
+    }
+}

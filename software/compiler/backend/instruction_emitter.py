@@ -8,9 +8,7 @@ from dataclasses import dataclass
 from enum import IntEnum
 import struct
 
-import sys
-sys.path.append('..')
-from frontend.ir_builder import IRGraph, IRNode, IROpType
+from ..frontend.ir_builder import IRGraph, IRNode, IROpType
 
 
 class NPUOpCode(IntEnum):

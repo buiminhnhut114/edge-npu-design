@@ -7,9 +7,7 @@ from typing import List, Dict, Set, Optional, Tuple
 from dataclasses import dataclass, field
 from enum import Enum, auto
 
-import sys
-sys.path.append('..')
-from frontend.ir_builder import IRGraph, IRNode, IROpType
+from ..frontend.ir_builder import IRGraph, IRNode, IROpType
 
 
 class ResourceType(Enum):

@@ -7,9 +7,7 @@ from typing import List, Dict, Optional, Tuple, Callable
 from dataclasses import dataclass, field
 import numpy as np
 
-import sys
-sys.path.append('..')
-from frontend.ir_builder import IRGraph, IRNode, IRTensor, IROpType, DataType
+from ..frontend.ir_builder import IRGraph, IRNode, IRTensor, IROpType, DataType
 
 
 @dataclass
