@@ -402,5 +402,36 @@ def create_parser(model_path: str) -> ModelParser:
         return ONNXParser()
     elif model_path.endswith('.tflite'):
         return TFLiteParser()
+    elif model_path.endswith('.pt') or model_path.endswith('.pth'):
+        from .pytorch_parser import PyTorchParser
+        return PyTorchParser()
+    else:
+        raise ValueError(f"Unsupported model format: {model_path}")
+
+
+def parse_model(model_path: str, 
+                input_shape: tuple = (1, 3, 224, 224),
+                model_class=None) -> IRGraph:
+    """
+    Universal model parser - automatically detects format
+    
+    Args:
+        model_path: Path to model file (.onnx, .tflite, .pt, .pth)
+        input_shape: Input tensor shape (for PyTorch tracing)
+        model_class: Model class (for PyTorch state_dict loading)
+        
+    Returns:
+        IRGraph representation
+    """
+    if model_path.endswith('.onnx'):
+        parser = ONNXParser()
+        return parser.parse(model_path)
+    elif model_path.endswith('.tflite'):
+        parser = TFLiteParser()
+        return parser.parse(model_path)
+    elif model_path.endswith('.pt') or model_path.endswith('.pth'):
+        from .pytorch_parser import PyTorchParser
+        parser = PyTorchParser()
+        return parser.parse(model_path, input_shape, model_class)
     else:
         raise ValueError(f"Unsupported model format: {model_path}")

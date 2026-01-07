@@ -497,42 +497,154 @@ def load_onnx_model(onnx_path: str) -> dict:
 
 
 # =============================================================================
+# PyTorch Model Loader
+# =============================================================================
+
+def load_pytorch_model(model_path: str, input_shape: tuple = (1, 3, 224, 224)) -> dict:
+    """
+    Load PyTorch model and convert to compiler format
+    Uses the new frontend parser for full support
+    """
+    try:
+        from .frontend import parse_model
+        from .optimizer import optimize_graph
+        from .optimizer.quantizer import quantize_graph
+        from .backend import compile_graph
+        
+        # Parse using new frontend
+        ir_graph = parse_model(model_path, input_shape)
+        
+        # Optimize
+        ir_graph = optimize_graph(ir_graph, opt_level=2)
+        
+        # Quantize
+        ir_graph = quantize_graph(ir_graph)
+        
+        # Compile
+        compiled = compile_graph(ir_graph)
+        
+        return compiled
+        
+    except ImportError as e:
+        print(f"Error loading PyTorch model: {e}")
+        print("Make sure PyTorch is installed: pip install torch")
+        return None
+
+
+# =============================================================================
 # CLI Interface
 # =============================================================================
 
 def main():
     import argparse
     
-    parser = argparse.ArgumentParser(description='EdgeNPU Model Compiler')
-    parser.add_argument('input', help='Input model file (ONNX or JSON)')
+    parser = argparse.ArgumentParser(
+        description='EdgeNPU Model Compiler',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Compile ONNX model
+  python npu_compiler.py model.onnx -o model.npu
+  
+  # Compile PyTorch TorchScript model
+  python npu_compiler.py model.pt -o model.npu --input-shape 1,3,224,224
+  
+  # Compile with C header output
+  python npu_compiler.py model.onnx -o model.npu --header model.h
+  
+  # Compile JSON model definition
+  python npu_compiler.py model.json -o model.npu
+
+Supported formats:
+  .onnx   - ONNX models
+  .pt     - PyTorch TorchScript models
+  .pth    - PyTorch state dict (requires --model-class)
+  .json   - JSON model definition
+        """
+    )
+    parser.add_argument('input', help='Input model file')
     parser.add_argument('-o', '--output', default='model.npu', help='Output binary file')
     parser.add_argument('--header', help='Generate C header file')
+    parser.add_argument('--input-shape', default='1,3,224,224',
+                        help='Input shape for PyTorch models (N,C,H,W)')
+    parser.add_argument('--model-class', help='Model class for PyTorch state_dict')
+    parser.add_argument('--opt-level', type=int, default=2, choices=[0,1,2,3],
+                        help='Optimization level (default: 2)')
     parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
     
     args = parser.parse_args()
     
-    # Load model
-    if args.input.endswith('.onnx'):
-        model_def = load_onnx_model(args.input)
-    elif args.input.endswith('.json'):
-        with open(args.input) as f:
+    input_file = args.input
+    
+    # Parse input shape
+    input_shape = tuple(int(x) for x in args.input_shape.split(','))
+    
+    print(f"EdgeNPU Compiler v1.0")
+    print(f"Input: {input_file}")
+    
+    # Determine format and compile
+    if input_file.endswith('.onnx'):
+        print("Format: ONNX")
+        model_def = load_onnx_model(input_file)
+        if model_def is None:
+            return 1
+        compiler = NPUCompiler()
+        compiled = compiler.compile_model(model_def)
+        compiler.save_binary(compiled, args.output)
+        if args.header:
+            compiler.save_c_header(compiled, args.header)
+            
+    elif input_file.endswith('.pt') or input_file.endswith('.pth'):
+        print(f"Format: PyTorch")
+        print(f"Input shape: {input_shape}")
+        
+        # Use new frontend pipeline
+        try:
+            from .frontend import parse_model
+            from .optimizer import optimize_graph
+            from .optimizer.quantizer import quantize_graph
+            from .backend import compile_graph
+            
+            ir_graph = parse_model(input_file, input_shape)
+            if args.verbose:
+                print(ir_graph.summary())
+            
+            ir_graph = optimize_graph(ir_graph, opt_level=args.opt_level, 
+                                      verbose=args.verbose)
+            ir_graph = quantize_graph(ir_graph)
+            compiled = compile_graph(ir_graph, verbose=args.verbose)
+            
+            compiled.save(args.output)
+            if args.header:
+                compiled.save_c_header(args.header)
+                
+            print(f"\nCompilation complete!")
+            print(f"  Output: {args.output}")
+            print(f"  Instructions: {compiled.num_instructions}")
+            print(f"  Weights: {compiled.weight_size} bytes")
+            
+        except ImportError as e:
+            print(f"Error: {e}")
+            print("Install PyTorch: pip install torch")
+            return 1
+            
+    elif input_file.endswith('.json'):
+        print("Format: JSON")
+        with open(input_file) as f:
             model_def = json.load(f)
+        compiler = NPUCompiler()
+        compiled = compiler.compile_model(model_def)
+        compiler.save_binary(compiled, args.output)
+        if args.header:
+            compiler.save_c_header(compiled, args.header)
     else:
-        print(f"Error: Unsupported file format: {args.input}")
+        print(f"Error: Unsupported file format: {input_file}")
+        print("Supported: .onnx, .pt, .pth, .json")
         return 1
     
-    if model_def is None:
-        return 1
-    
-    # Compile
-    compiler = NPUCompiler()
-    compiled = compiler.compile_model(model_def)
-    
-    # Save outputs
-    compiler.save_binary(compiled, args.output)
-    
+    print(f"\nSaved: {args.output}")
     if args.header:
-        compiler.save_c_header(compiled, args.header)
+        print(f"Header: {args.header}")
     
     return 0
 

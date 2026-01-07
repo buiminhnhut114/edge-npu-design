@@ -105,3 +105,4 @@ help:
 	@echo "  CROSS_COMPILE - Toolchain prefix (default: riscv32-unknown-elf-)"
 
 .PHONY: all dirs clean disasm install size help
+
